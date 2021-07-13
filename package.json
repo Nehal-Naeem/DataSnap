@@ -1,0 +1,27 @@
+{
+  "name": "srvr_tut",
+  "version": "1.0.0",
+  "description": "Data selfie app by Joey Lee. Learning using the CodingTrain YT channel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nehal-Naeem/SRVR_TUT.git"
+  },
+  "keywords": [
+    "Example",
+    "data",
+    "selfie"
+  ],
+  "author": "Nehal Naeem, Joey Lee, Daniel Shiffman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nehal-Naeem/SRVR_TUT/issues"
+  },
+  "homepage": "https://github.com/Nehal-Naeem/SRVR_TUT#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
