@@ -20,19 +20,6 @@
 </head>
 
 <body>
-    <script>
-        if ('geolocation' in navigator) {
-            console.log('geolocation is available');
-            const geo = navigator.geolocation;
-            geo.getCurrentPosition((position) => {
-                console.log('Latitude: ' + position.coords.latitude);
-                console.log('Longitude: ' + position.coords.longitude);
-            })
-        } else {
-            console.log('geolocation IS NOT available');
-        }
-
-    </script>
     <h1> Data Selfie Project 🤓🤳</h1>
     <p>
         Latitude: <span id="lat"></span>⁰<br />
@@ -48,10 +35,7 @@
 
         const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         const tiles = L.tileLayer(tileUrl, { attribution });
-        tiles.addTo(mymap);
-
-        // marker setup
-        
+        tiles.addTo(mymap);       
         
 
         const geo = navigator.geolocation;
@@ -62,8 +46,7 @@
             document.getElementById('lat').textContent = lat;
             document.getElementById('lon').textContent = lon;
             const marker = L.marker([lat, lon]).addTo(mymap);
-            
-
+    
             mymap.setView([lat, lon], 3);
         })
 
