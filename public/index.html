@@ -1,13 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <style>
+        #issLocMap {
+            height: 180px;
+        }
+    </style>
     <title>Nandesuka</title>
 </head>
+
 <body>
+    <script>
+        if ('geolocation' in navigator) {
+            console.log('geolocation is available');
+            const geo = navigator.geolocation;
+            geo.getCurrentPosition((position) => {
+                console.log('Latitude: ' + position.coords.latitude);
+                console.log('Longitude: ' + position.coords.longitude);
+            })
+        } else {
+            console.log('geolocation IS NOT available');
+        }
+
+    </script>
     <h1> Data Selfie Project 🤓🤳</h1>
-    
+    <p>
+        Latitude: <span id="lat"></span>⁰<br />
+        Longitude: <span id="lon"></span>⁰
+    </p>
+
+    <div id="issLocMap"></div>
+
+    <script>
+        // map instantiation
+        const mymap = L.map('issLocMap').setView([0, 0], 1);
+        const attribution = '&copy; <a href = "https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors 🌎🌍🌏';
+
+        const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const tiles = L.tileLayer(tileUrl, { attribution });
+        tiles.addTo(mymap);
+
+        // marker setup
+        
+        
+
+        const geo = navigator.geolocation;
+        geo.getCurrentPosition(position => {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+
+            document.getElementById('lat').textContent = lat;
+            document.getElementById('lon').textContent = lon;
+            const marker = L.marker([lat, lon]).addTo(mymap);
+            
+
+            mymap.setView([lat, lon], 3);
+        })
+
+
+    </script>
+
 </body>
+
 </html>
