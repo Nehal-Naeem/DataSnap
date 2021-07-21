@@ -28,6 +28,8 @@
 
     <div id="issLocMap"></div>
 
+    <button style="margin-top: 2%;">SUBMIT 📫</button>
+
     <script>
         // map instantiation
         const mymap = L.map('issLocMap').setView([0, 0], 1);
@@ -45,6 +47,8 @@
 
             document.getElementById('lat').textContent = lat;
             document.getElementById('lon').textContent = lon;
+            const marker = L.marker([lat, lon]).addTo(mymap);
+            mymap.setView([lat, lon], 3);
 
             // api post request
             const data = { lat, lon};
@@ -55,16 +59,14 @@
                 },
                 body: JSON.stringify(data)
             }
+
             let res = await fetch('/location', options);
             let json = await res.json();
             console.log('Post request sent');
             console.log(json);
-            
-
-            const marker = L.marker([lat, lon]).addTo(mymap);
-    
-            mymap.setView([lat, lon], 3);
         })
+    
+        
 
 
     </script>
