@@ -39,12 +39,28 @@
         
 
         const geo = navigator.geolocation;
-        geo.getCurrentPosition(position => {
+        geo.getCurrentPosition(async position => {
             let lat = position.coords.latitude;
             let lon = position.coords.longitude;
 
             document.getElementById('lat').textContent = lat;
             document.getElementById('lon').textContent = lon;
+
+            // api post request
+            const data = { lat, lon};
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+            let res = await fetch('/location', options);
+            let json = await res.json();
+            console.log('Post request sent');
+            console.log(json);
+            
+
             const marker = L.marker([lat, lon]).addTo(mymap);
     
             mymap.setView([lat, lon], 3);
