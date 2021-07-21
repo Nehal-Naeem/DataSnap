@@ -28,7 +28,7 @@
 
     <div id="issLocMap"></div>
 
-    <button style="margin-top: 2%;">SUBMIT 📫</button>
+    <button style="margin-top: 2%;" id="submit">LOCATE & SUBMIT</button>
 
     <script>
         // map instantiation
@@ -37,36 +37,38 @@
 
         const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         const tiles = L.tileLayer(tileUrl, { attribution });
-        tiles.addTo(mymap);       
-        
+        tiles.addTo(mymap);
 
-        const geo = navigator.geolocation;
-        geo.getCurrentPosition(async position => {
-            let lat = position.coords.latitude;
-            let lon = position.coords.longitude;
 
-            document.getElementById('lat').textContent = lat;
-            document.getElementById('lon').textContent = lon;
-            const marker = L.marker([lat, lon]).addTo(mymap);
-            mymap.setView([lat, lon], 3);
+        document.getElementById('submit').addEventListener('click', event => {
+            const geo = navigator.geolocation;
+            geo.getCurrentPosition(async position => {
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
 
-            // api post request
-            const data = { lat, lon};
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }
+                document.getElementById('lat').textContent = lat;
+                document.getElementById('lon').textContent = lon;
+                const marker = L.marker([lat, lon]).addTo(mymap);
+                mymap.setView([lat, lon], 3);
 
-            let res = await fetch('/location', options);
-            let json = await res.json();
-            console.log('Post request sent');
-            console.log(json);
-        })
-    
-        
+                // api post request
+                const data = { lat, lon };
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+
+                let res = await fetch('/location', options);
+                let json = await res.json();
+                console.log('Post request sent');
+                console.log(json);
+
+            });
+        });
+
 
 
     </script>
