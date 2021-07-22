@@ -24,6 +24,7 @@ app.post('/location', (request, response) => {
     response.json({
         status: 'success',
         timeStamp: timeStamp,
+        name: location.name,
         latitude: location.lat,
         longitude: location.lon
     });

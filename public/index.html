@@ -27,7 +27,10 @@
     </p>
 
     <div id="issLocMap"></div>
-
+    <div id="container">
+        <label for="name"> Your Name: </label>
+        <input type="text" style="margin-top: 2%;" id= "name"></input>
+    </div>
     <button style="margin-top: 2%;" id="submit">LOCATE & SUBMIT</button>
 
     <script>
@@ -51,8 +54,11 @@
                 const marker = L.marker([lat, lon]).addTo(mymap);
                 mymap.setView([lat, lon], 3);
 
+
                 // api post request
-                const data = { lat, lon };
+                const data = { latituide: lat, longitude: lon, name: "" };
+                data.name = document.getElementById("name").value;
+
                 const options = {
                     method: 'POST',
                     headers: {
