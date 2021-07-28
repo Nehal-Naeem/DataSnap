@@ -1,3 +1,4 @@
+const { request, response } = require('express');
 const express = require('express');
 const DataStore = require('nedb');
 
@@ -12,6 +13,18 @@ app.use(express.json({limit: '1mb'}));
 let dataBase = new DataStore('dataBase.db');
 dataBase.loadDatabase();
 
+
+// Get Request routing
+app.get('/all', (request, response) => {
+    dataBase.find({}, (error, data) => {
+        if (error) {
+            console.log(error);
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+})
 
 // Post request routing
 app.post('/location', (request, response) => {
