@@ -34,13 +34,8 @@ app.post('/location', (request, response) => {
     location.timeStamp = timeStamp;
     dataBase.insert(location);
     console.log(location);
-    response.json({
-        status: 'success',
-        timeStamp: timeStamp,
-        name: location.name,
-        latitude: location.lat,
-        longitude: location.lon
-    });
+    location.status = 'success'; 
+    response.json(location);
 })
 
 
