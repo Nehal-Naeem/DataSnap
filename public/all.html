@@ -28,14 +28,18 @@
 
 <body>
     <h1> Display DataBase Contents 👨‍💻 </h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-        </tr>
+    <table id='t1'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+
     </table>
     <script>
         getData().then(parsedData => {
@@ -49,19 +53,26 @@
         }
 
         function displayData(parsedData) {
+            let table = document.getElementById('t1').getElementsByTagName('tbody')[0];
             for (instance of parsedData) {
-                let root = document.createElement('div');
-                let name = document.createElement('div');
-                let geo = document.createElement('div');
-                let timeStamp = document.createElement('div');
 
-                name.textContent = 'Name: ' + instance.name;
-                geo.textContent = 'Coordinates: ' + instance.latitude + ', ' + instance.longitude;
-                let date = new Date(instance.timeStamp).toLocaleString();
-                timeStamp.textContent = 'Date & time: ' + date;
+                let row = table.insertRow(0);
 
-                root.append(name, geo, timeStamp);
-                document.body.append(root);
+                let c0 = row.insertCell(0);
+                let c1 = row.insertCell(1);
+                let c2 = row.insertCell(2);
+                let c3 = row.insertCell(3);
+                let c4 = row.insertCell(4);
+
+                c0.textContent = instance.name;
+                
+                let date = new Date(instance.timeStamp).toLocaleDateString();
+                let time = new Date(instance.timeStamp).toLocaleTimeString();
+                c1.textContent = date;
+                c2.textContent = time;
+                
+                c3.textContent = instance.latitude;
+                c4.textContent = instance.longitude;
 
             }
         }
