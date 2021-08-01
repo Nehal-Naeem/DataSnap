@@ -41,6 +41,7 @@
         <tbody></tbody>
 
     </table>
+    <input type="button" value="Home 🏡" onclick="changePage()"/>
     <script>
         getData().then(parsedData => {
             displayData(parsedData);
@@ -73,8 +74,10 @@
                 
                 c3.textContent = instance.latitude;
                 c4.textContent = instance.longitude;
-
             }
+        }
+        function changePage() {
+            window.location.href = 'index.html';
         }
     </script>
 </body>

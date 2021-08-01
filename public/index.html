@@ -32,6 +32,7 @@
         <input type="text" style="margin-top: 2%;" id= "name"></input>
     </div>
     <button style="margin-top: 2%;" id="submit">LOCATE & SUBMIT</button>
+    <input type="button" value="Data Records" onclick="changePage()"/>
 
     <script>
         // map instantiation
@@ -75,9 +76,12 @@
             });
         });
 
-
+        function changePage() {
+            window.location.href = "all.html"
+        }
 
     </script>
+
 
 </body>
 
